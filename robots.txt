@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /collections/18-plus.html
+Sitemap: https://derk19.github.io/sitemap.xml
