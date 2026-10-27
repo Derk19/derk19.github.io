@@ -77,3 +77,16 @@ h2{font-size:clamp(1.35rem,3vw,1.9rem);text-transform:uppercase;margin:0}
 .new-note{margin:-4px 0 12px;color:#bdbdbd;font-size:.92rem}.new-note a{white-space:nowrap}
 .card-col.seasonal{color:#ff8a1f;font-weight:600}
 @media(max-width:480px){.nav{gap:0;mask-image:none;justify-content:space-between}.nav a{font-size:.8rem;padding:7px 6px}}
+
+.worn-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.worn-card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:.15s}
+.worn-card:hover{border-color:#444}
+.worn-media{position:relative;display:block;aspect-ratio:9/16;background:#161616;overflow:hidden}
+.worn-media video{width:100%;height:100%;object-fit:cover;display:block}
+.worn-tag{position:absolute;left:8px;bottom:8px;background:rgba(0,0,0,.62);color:#e6e6e6;font-size:.7rem;line-height:1;padding:5px 8px;border-radius:999px;letter-spacing:.02em;backdrop-filter:blur(4px)}
+.worn-body{padding:10px 12px 12px;display:flex;flex-direction:column;flex:1}
+.worn-pill{align-self:flex-start;margin:-.2em 0 .7em;background:transparent;border:1px solid #444;color:#ddd;font-size:.72rem;padding:3px 9px;border-radius:999px;text-decoration:none;text-transform:uppercase;font-family:Oswald,Impact,"Arial Narrow",sans-serif;letter-spacing:.04em}
+.worn-pill:hover{border-color:var(--or);color:#fff}
+.worn-card{scroll-margin-top:76px}
+@media(max-width:1000px){.worn-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.worn-grid{gap:10px}.worn-pill{font-size:.66rem}}

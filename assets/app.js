@@ -6,7 +6,7 @@
   var terms=function(v){return v.toLowerCase().trim().split(/\s+/).filter(Boolean)};
   if(q.dataset.target==='home'){
     var idx=window.TM_INDEX||[],res=document.getElementById('results'),g=document.getElementById('results-grid'),empty=res.querySelector('.empty');
-    var hide=[document.getElementById('new'),document.getElementById('collections'),document.getElementById('about')];
+    var hide=[document.getElementById('new'),document.getElementById('worn'),document.getElementById('collections'),document.getElementById('about')].filter(Boolean);
     q.addEventListener('input',function(){
       var t=terms(q.value);
       if(!t.length){res.hidden=true;hide.forEach(function(e){e.hidden=false});count.textContent='';return}
@@ -24,4 +24,14 @@
   q.addEventListener('input',apply);
   [].forEach.call(document.querySelectorAll('.chip'),function(b){b.addEventListener('click',function(){
     [].forEach.call(document.querySelectorAll('.chip'),function(x){x.classList.remove('on')});b.classList.add('on');filt=b.dataset.f;apply()})});
+})();
+
+(function(){
+  var vs=[].slice.call(document.querySelectorAll('.worn-media video'));if(!vs.length)return;
+  var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(rm){vs.forEach(function(v){v.removeAttribute('autoplay');v.pause()});return}
+  if(!('IntersectionObserver' in window)){return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;
+    if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){})}else{v.pause()}})},{threshold:.35});
+  vs.forEach(function(v){io.observe(v)});
 })();
