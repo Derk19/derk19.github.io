@@ -72,3 +72,8 @@ h2{font-size:clamp(1.35rem,3vw,1.9rem);text-transform:uppercase;margin:0}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
 .hol{margin:34px 0 8px;scroll-margin-top:76px}.hol h2{margin-bottom:14px;padding-left:12px;border-left:4px solid var(--or)}.soon{color:var(--mut);font-size:.95rem;margin:0 0 6px 16px}.holnav{position:sticky;top:60px;z-index:10;background:rgba(17,17,17,.95);padding:10px 0;margin:0 0 6px}
+.subtabs{margin:4px 0 12px}.subtabs a{font-family:Oswald,Impact,"Arial Narrow",sans-serif}.subtabs a[aria-current]{background:var(--or);border-color:var(--or);color:#111}
+.sport-link{margin:-6px 0 12px 16px}
+.new-note{margin:-4px 0 12px;color:#bdbdbd;font-size:.92rem}.new-note a{white-space:nowrap}
+.card-col.seasonal{color:#ff8a1f;font-weight:600}
+@media(max-width:480px){.nav{gap:0;mask-image:none;justify-content:space-between}.nav a{font-size:.8rem;padding:7px 6px}}

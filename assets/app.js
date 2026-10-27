@@ -1,3 +1,4 @@
+(function(){var cur=document.querySelector('.nav a[aria-current]');if(cur&&cur.scrollIntoView&&cur.parentNode.scrollWidth>cur.parentNode.clientWidth){cur.parentNode.scrollLeft=Math.max(0,cur.offsetLeft-60)}})();
 (function(){
   var q=document.getElementById('q'); if(!q) return;
   var count=document.querySelector('.search-count');
