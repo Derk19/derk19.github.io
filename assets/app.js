@@ -18,7 +18,8 @@
   }
   var cards=[].slice.call(document.querySelectorAll('.grid .card')),empty=document.querySelector('main .empty'),filt='';
   function apply(){var t=terms(q.value),n=0;cards.forEach(function(c){var ok=t.every(function(w){return c.dataset.k.indexOf(w)>-1})&&(!filt||(' '+c.dataset.c+' ').indexOf(' '+filt+' ')>-1);c.hidden=!ok;if(ok)n++});
-    count.textContent=(t.length||filt)?n+' design'+(n===1?'':'s'):'';if(empty)empty.hidden=n>0}
+    count.textContent=(t.length||filt)?n+' design'+(n===1?'':'s'):'';if(empty)empty.hidden=n>0;
+    [].forEach.call(document.querySelectorAll('.hol'),function(s){var any=s.querySelector('.card:not([hidden])');s.hidden=!!(t.length&&!any)})}
   q.addEventListener('input',apply);
   [].forEach.call(document.querySelectorAll('.chip'),function(b){b.addEventListener('click',function(){
     [].forEach.call(document.querySelectorAll('.chip'),function(x){x.classList.remove('on')});b.classList.add('on');filt=b.dataset.f;apply()})});
