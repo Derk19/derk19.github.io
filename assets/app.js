@@ -10,10 +10,10 @@
     q.addEventListener('input',function(){
       var t=terms(q.value);
       if(!t.length){res.hidden=true;hide.forEach(function(e){e.hidden=false});count.textContent='';return}
-      var m=idx.filter(function(d){return t.every(function(w){return d[5].indexOf(w)>-1})});
+      var m=idx.filter(function(d){return t.every(function(w){return d[4].indexOf(w)>-1})});
       res.hidden=false;hide.forEach(function(e){e.hidden=true});
       count.textContent=m.length+' design'+(m.length===1?'':'s')+' found';empty.hidden=m.length>0;
-      g.innerHTML=m.slice(0,120).map(function(d){var main=d[2]||d[3];return '<article class="card"><a class="card-img" href="'+esc(main)+'" target="_blank" rel="noopener"><img src="'+esc(d[1])+'" width="600" height="600" loading="lazy" alt="'+esc(d[0])+' t-shirt design by True Motion Apparel"></a><div class="card-body"><p class="card-col">'+esc(d[4])+'</p><h3 class="card-title">'+esc(d[0])+'</h3><div class="card-btns">'+(d[2]?'<a class="btn btn-rb" href="'+esc(d[2])+'" target="_blank" rel="noopener">Buy on Redbubble</a>':'')+(d[3]?'<a class="btn btn-tp" href="'+esc(d[3])+'" target="_blank" rel="noopener">Buy on TeePublic</a>':'')+'</div></div></article>'}).join('');
+      g.innerHTML=m.slice(0,120).map(function(d){var tp=d[2]||'';var img='<img src="'+esc(d[1])+'" width="600" height="600" loading="lazy" alt="'+esc(d[0])+' t-shirt design by True Motion Apparel">';var pic=tp?'<a class="card-img" href="'+esc(tp)+'" target="_blank" rel="noopener">'+img+'</a>':'<span class="card-img">'+img+'</span>';var btn=tp?'<a class="btn btn-tp" href="'+esc(tp)+'" target="_blank" rel="noopener">Buy on TeePublic</a>':'';return '<article class="card">'+pic+'<div class="card-body"><p class="card-col">'+esc(d[3])+'</p><h3 class="card-title">'+esc(d[0])+'</h3><div class="card-btns">'+btn+'</div></div></article>'}).join('');
     });
     return;
   }
