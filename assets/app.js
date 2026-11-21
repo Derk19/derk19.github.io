@@ -6,7 +6,7 @@
   var terms=function(v){return v.toLowerCase().trim().split(/\s+/).filter(Boolean)};
   if(q.dataset.target==='home'){
     var idx=window.TM_INDEX||[],res=document.getElementById('results'),g=document.getElementById('results-grid'),empty=res.querySelector('.empty');
-    var hide=[document.getElementById('new'),document.getElementById('worn'),document.getElementById('collections'),document.getElementById('about')].filter(Boolean);
+    var hide=[document.getElementById('new'),document.getElementById('worn'),document.getElementById('collections'),document.getElementById('about'),document.getElementById('bestsellers')].filter(Boolean);
     q.addEventListener('input',function(){
       var t=terms(q.value);
       if(!t.length){res.hidden=true;hide.forEach(function(e){e.hidden=false});count.textContent='';return}
