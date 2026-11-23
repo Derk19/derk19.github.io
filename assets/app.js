@@ -1,13 +1,10 @@
 /* GoatCounter — cookieless, no ads.
-   Derek, to turn analytics on:
-   1. Create a free site at https://www.goatcounter.com/signup
-   2. Replace YOUR_CODE below with your site code (the subdomain).
-      Example: if the dashboard URL is https://truemotionapparel.goatcounter.com
-      the code is truemotionapparel.
-   3. Deploy. Until YOUR_CODE is replaced, this sends nothing.
-   TeePublic clicks are counted as events at /out/<design-slug>. */
+   Site code: truemotionapparel
+   Dashboard: https://truemotionapparel.goatcounter.com/
+   TeePublic clicks are counted as events at /out/<design-slug>.
+   GoatCounter ignores localhost and 127.0.0.1, so local previews do not count. */
 (function(){
-  var ENDPOINT="https://YOUR_CODE.goatcounter.com/count";
+  var ENDPOINT="https://truemotionapparel.goatcounter.com/count";
   if(!ENDPOINT||ENDPOINT.indexOf("YOUR_CODE")!==-1)return;
   var s=document.createElement("script");
   s.async=true;
