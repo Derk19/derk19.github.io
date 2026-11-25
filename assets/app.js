@@ -92,3 +92,14 @@
 })();
 
 (function(){var row=document.getElementById('drops-row');if(!row)return;var prev=document.querySelector('.row-prev'),next=document.querySelector('.row-next');if(!prev||!next)return;function step(){var c=row.querySelector('.card');return c?c.getBoundingClientRect().width+16:320}prev.addEventListener('click',function(){row.scrollBy({left:-step(),behavior:'smooth'})});next.addEventListener('click',function(){row.scrollBy({left:step(),behavior:'smooth'})})})();
+
+(function(){
+  var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(rm||!('IntersectionObserver' in window))return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -6% 0px'});
+  var vh=window.innerHeight||800;
+  [].slice.call(document.querySelectorAll('.block, .tile, .card, .worn-card, .how-step')).forEach(function(el){
+    if(el.getBoundingClientRect().top<vh)return; /* already on screen: show as-is, no flash */
+    el.classList.add('rv');io.observe(el);
+  });
+})();
