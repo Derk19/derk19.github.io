@@ -46,18 +46,20 @@
       if(!t.length){res.hidden=true;hide.forEach(function(e){e.hidden=false});count.textContent='';return}
       var m=idx.filter(function(d){return t.every(function(w){return d[4].indexOf(w)>-1})});
       res.hidden=false;hide.forEach(function(e){e.hidden=true});
-      count.textContent=m.length+' design'+(m.length===1?'':'s')+' found';empty.hidden=m.length>0;
+      var w=terms(q.value);count.textContent=w.length===1?m.length+' '+w[0]+'-themed design'+(m.length===1?'':'s'):m.length+' designs matching "'+q.value.trim()+'"';empty.hidden=m.length>0;
       g.innerHTML=m.slice(0,120).map(function(d){var tp=withUtm(d[2]||'',d[1]);var img='<img src="'+esc(d[1])+'" width="600" height="600" loading="lazy" alt="'+esc(d[0])+' t-shirt design by True Motion Apparel">';var pic=tp?'<a class="card-img" href="'+esc(tp)+'" target="_blank" rel="noopener">'+img+'</a>':'<span class="card-img">'+img+'</span>';var btn=tp?'<a class="btn btn-tp" href="'+esc(tp)+'" target="_blank" rel="noopener">Buy on TeePublic</a>':'';return '<article class="card">'+pic+'<div class="card-body"><p class="card-col">'+esc(d[3])+'</p><h3 class="card-title">'+esc(d[0])+'</h3><div class="card-btns">'+btn+'</div></div></article>'}).join('');
     });
     return;
   }
   var cards=[].slice.call(document.querySelectorAll('.grid .card')),empty=document.querySelector('main .empty'),filt='';
   function apply(){var t=terms(q.value),n=0;cards.forEach(function(c){var ok=t.every(function(w){return c.dataset.k.indexOf(w)>-1})&&(!filt||(' '+c.dataset.c+' ').indexOf(' '+filt+' ')>-1);c.hidden=!ok;if(ok)n++});
-    count.textContent=(t.length||filt)?n+' design'+(n===1?'':'s'):'';if(empty)empty.hidden=n>0;
+    if(t.length){var w2=terms(q.value);count.textContent=w2.length===1?n+' '+w2[0]+'-themed design'+(n===1?'':'s'):n+' designs matching "'+q.value.trim()+'"'}else if(filt){count.textContent=n+' design'+(n===1?'':'s')}else{count.textContent=''}if(empty)empty.hidden=n>0;
     [].forEach.call(document.querySelectorAll('.hol'),function(s){var any=s.querySelector('.card:not([hidden])');s.hidden=!!(t.length&&!any)})}
   q.addEventListener('input',apply);
   [].forEach.call(document.querySelectorAll('.chip'),function(b){b.addEventListener('click',function(){
     [].forEach.call(document.querySelectorAll('.chip'),function(x){x.classList.remove('on')});b.classList.add('on');filt=b.dataset.f;apply()})});
+  var grid=document.querySelector('.grid'),sort=document.getElementById('sort');
+  if(sort&&grid){sort.addEventListener('change',function(){var list=cards.slice();if(sort.value==='az'){list.sort(function(x,y){var a=(x.querySelector('.card-title')||{textContent:''}).textContent.toLowerCase(),b=(y.querySelector('.card-title')||{textContent:''}).textContent.toLowerCase();return a<b?-1:a>b?1:0})}list.forEach(function(c){grid.appendChild(c)})})}
 })();
 (function(){
   document.querySelectorAll("[data-count]").forEach(function(el){
@@ -88,3 +90,5 @@
     if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){})}else{v.pause()}})},{threshold:.35});
   vs.forEach(function(v){io.observe(v)});
 })();
+
+(function(){var row=document.getElementById('drops-row');if(!row)return;var prev=document.querySelector('.row-prev'),next=document.querySelector('.row-next');if(!prev||!next)return;function step(){var c=row.querySelector('.card');return c?c.getBoundingClientRect().width+16:320}prev.addEventListener('click',function(){row.scrollBy({left:-step(),behavior:'smooth'})});next.addEventListener('click',function(){row.scrollBy({left:step(),behavior:'smooth'})})})();

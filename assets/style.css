@@ -78,6 +78,13 @@ h2{font-size:clamp(1.4rem,3vw,2rem);text-transform:uppercase;margin:0;line-heigh
 
 /* ---------- cards ---------- */
 .row{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(210px,1fr);gap:14px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory}
+.row{scrollbar-width:none}
+.row::-webkit-scrollbar{display:none}
+.row-wrap{position:relative}
+.row-arrow{position:absolute;top:34%;z-index:3;width:42px;height:42px;border-radius:50%;border:1px solid #555;background:rgba(17,17,17,.88);color:#fff;font-size:1.6rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.row-arrow:hover{border-color:var(--or);color:var(--or2)}
+.row-prev{left:-6px}.row-next{right:-6px}
+.row-hint{color:var(--mut);font-size:.85rem;text-align:right;margin:2px 0 0}
 .row .card{scroll-snap-align:start}
 @media(min-width:1100px){.row{grid-auto-columns:calc((100% - 5*14px)/6)}}
 .row.featured{grid-auto-columns:minmax(272px,330px)}
@@ -97,23 +104,27 @@ span.card-img{display:block}
 .card-col{margin:0;color:var(--or);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
 .card-col.seasonal{color:#ff8a1f;font-weight:600}
 .card-title{font-family:system-ui,-apple-system,sans-serif;font-size:.98rem;line-height:1.3;margin:.3em 0 .8em;letter-spacing:0;font-weight:650}
+.card-sub{margin:-.45em 0 .9em;color:var(--mut);font-size:.82rem;line-height:1.35}
 .card-btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
 .card-btns .btn{flex:1 1 auto;padding:10px 10px;font-size:.82rem}
 .badge-new{position:absolute;top:10px;left:10px;z-index:2;background:var(--or);color:#161616;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border-radius:999px;box-shadow:0 2px 10px rgba(0,0,0,.5)}
 
 /* ---------- instagram / bestsellers ---------- */
-.ig-links{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}
-.ig-links .btn{padding:9px 16px;font-size:.85rem}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:0 0 14px}
+.ig-grid a{text-decoration:none;color:inherit}
+.ig-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:2.4rem;text-shadow:0 2px 14px rgba(0,0,0,.85);pointer-events:none}
+.worn-media img{width:100%;height:100%;object-fit:cover;display:block}
+.worn-cap{display:block;color:#cfcfcf;font-size:.92rem;line-height:1.45}
 .ig-note{color:var(--mut);font-size:.92rem;margin:0 0 16px}
 .ig-note a{color:var(--or2)}
 
 /* ---------- collections tiles ---------- */
 .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
-.tile{position:relative;display:block;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;background:#161616;text-decoration:none;color:#fff;transition:border-color .18s ease}
+.tile{display:block;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--bg2);text-decoration:none;color:#fff;transition:border-color .18s ease}
 .tile:hover{border-color:var(--or)}
-.tile img{width:100%;height:100%;object-fit:cover;transition:.3s;opacity:.85}
+.tile img{width:100%;aspect-ratio:4/3;height:auto;object-fit:cover;transition:.3s;opacity:.85}
 .tile:hover img{transform:scale(1.05);opacity:1}
-.tile-txt{position:absolute;inset:auto 0 0 0;padding:40px 16px 14px;background:linear-gradient(transparent,rgba(0,0,0,.92) 45%);display:flex;flex-direction:column}
+.tile-txt{padding:12px 16px 14px;background:var(--bg2);display:flex;flex-direction:column}
 .tile-name{font-size:1.4rem;text-transform:uppercase;font-weight:700}
 .tile-n{color:var(--or);font-size:.85rem;font-weight:700}
 .tile-b{color:#cfcfcf;font-size:.88rem}
@@ -193,13 +204,18 @@ span.card-img{display:block}
   .row{grid-auto-columns:46%}
   .row.featured{grid-auto-columns:74%}
   .tiles{grid-template-columns:repeat(2,1fr);gap:10px}
-  .tile{aspect-ratio:1}
+  .tile img{aspect-ratio:1}
   .tile-name{font-size:1.05rem}
   .tile-b{display:none}
   .about{flex-direction:column;align-items:flex-start}
   .block{padding:34px 12px 6px}
   .wrap{padding-left:12px;padding-right:12px}
   .worn-grid{gap:10px}
+  .row-arrow{display:none}
+  .ig-grid{gap:10px}
+  .ig-grid .worn-body{padding:8px 8px 10px}
+  .worn-cap{font-size:.8rem}
+  .ig-play{font-size:1.8rem}
   .worn-pill{font-size:.66rem}
 }
 @media(prefers-reduced-motion:reduce){
@@ -208,3 +224,13 @@ span.card-img{display:block}
   .hero-still{display:block!important}
   .card-img::before{animation:none!important}
 }
+
+/* ---------- sort control (all.html) ---------- */
+.sort-row{display:flex;justify-content:flex-end;margin:0 0 14px}
+.sort{display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--mut);text-transform:uppercase;font-family:Oswald,Impact,"Arial Narrow",sans-serif;letter-spacing:.02em}
+.sort select{background:var(--bg3);border:1px solid #333;color:#ddd;border-radius:999px;padding:7px 12px;font-size:.9rem}
+
+/* ---------- 404 ---------- */
+.notfound{padding-top:70px;padding-bottom:50px}
+.notfound p{color:var(--mut);max-width:60ch}
+.notfound .btn{margin:0 8px 8px 0}
